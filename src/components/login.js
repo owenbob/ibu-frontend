@@ -35,15 +35,15 @@ class Login extends React.Component {
       })
       .then(response => {
         //stores user token in local storage
-        window.localStorage.setItem("token", response.data.access_token);
+        window.localStorage.setItem("token", response.data.auth_token);
         //updates state with data from response
         this.setState({
-          token: response.data.access_token,
-          name: response.data.welcome,
+          token: response.data.auth_token,
+          name: response.data.user,
           authenticated: true
         });
         window.localStorage.setItem("authenticated", true);
-        window.localStorage.setItem("name", response.data.welcome);
+        window.localStorage.setItem("name", response.data.user);
         //notifies user on successful login
         toast.success(response.data.message);
       })
