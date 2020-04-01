@@ -1,0 +1,44 @@
+h1 {
+  text-transform: capitalize;
+}
+
+.btn {
+  margin-top: -7.5px;
+  margin-left: 10px;
+}
+
+.collection .collection-item {
+  padding: 12px 20px;
+  text-transform: capitalize;
+}
+
+html,
+body,
+.login-box {
+  height: 100vh;
+}
+
+.card .card-action {
+  border-top: 0;
+}
+
+.form-signin .btn {
+  margin-top: 0;
+  margin-left: 0;
+}
+
+#search {
+  width: 300px;
+}
+
+.search:hover {
+  background-color: #fff;
+}
+
+.use i {
+  margin-right: 5px;
+}
+
+nav ul.right {
+  text-transform: capitalize;
+}
