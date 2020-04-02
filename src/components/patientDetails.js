@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import PatientDetail from "./patientDetail";
 import { ToastContainer } from "react-toastify";
-import Pagination from "./pagination";
 import Navbar from "./navbar";
 import SideNavbar from "./side_navbar";
 import instance from "../config";
@@ -12,7 +11,7 @@ class PatientDetails extends Component {
     super(props);
     this.state = {
       authenticated: window.localStorage.getItem("token"),
-      patientname: "",
+      patient: "",
       patientid: "",
       treatments: [],
       term: "",
@@ -21,8 +20,6 @@ class PatientDetails extends Component {
     };
     this.searchHandler = this.searchHandler.bind(this);
     this.searchingFor = this.searchingFor.bind(this);
-    this.nextPage = this.nextPage.bind(this);
-    this.prevPage = this.prevPage.bind(this);
   }
 
   componentWillMount() {
@@ -62,19 +59,11 @@ class PatientDetails extends Component {
       .then(response => {
         console.log(response.data)
         this.setState({
-          patientname: response.data.patient.first_name,
+          patient: response.data.patient,
           patientid: response.data.patient.id
         });
       })
       .catch(err => {});
-  }
-
-  nextPage() {
-    this.getPatientDetails(this.state.response.next);
-  }
-
-  prevPage() {
-    this.getPatientDetails(this.state.response.prev);
   }
 
   render() {
@@ -83,7 +72,19 @@ class PatientDetails extends Component {
     }
 
     if (!this.state.items) {
-      return <div>loading</div>;
+    return(
+        <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      );
     }
     const patientDetails = this.state.items
       .map((patientDetail, i) => {
@@ -99,13 +100,15 @@ class PatientDetails extends Component {
       <div>
         <Navbar />
         <div className="container">
-          <SideNavbar />
           <div>
           <br />
           <Link className="btn grey" to="/patients">
             Back
           </Link>
-          <h1>{this.state.patientname}</h1>
+          <p>Name: {this.state.patient.first_name} {this.state.patient.second_name} {this.state.patient.third_name}</p>
+          <p>Gender: {this.state.patient.gender}</p>
+          <p>Address: {this.state.patient.address}</p>
+          <p>Phone Number: {this.state.patient.phone_number}</p>
           <ToastContainer
             position="top-right"
             autoClose={5000}
@@ -114,23 +117,19 @@ class PatientDetails extends Component {
             closeOnClick
             pauseOnHover
           />
-          <form>
-            <input
-              id="search"
-              type="text"
-              placeholder="search"
-              onChange={this.searchHandler}
-            />
-          </form>
-          <ul className="collection">{patientDetails}</ul>
-          <Pagination
-            page={this.state.response.current}
-            pages={this.state.response.pages}
-            onNext={this.nextPage}
-            onPrev={this.prevPage}
-          />
+          <table className="striped">
+            <thead>
+              <tr>
+                  <th>Id</th>
+                  <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody>
+              {patientDetails}
+            </tbody>
+          </table>
           <Link
-            to={`/patient/items/add/${this.state.listid}`}
+            to={`/patient/treatment/add/${this.state.patientid}`}
             className="btn-large btn-floating red"
           >
             <i className="fa fa-plus" />

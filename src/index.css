@@ -42,3 +42,38 @@ body,
 nav ul.right {
   text-transform: capitalize;
 }
+
+#left-sidebar-nav {
+  width: 15%;
+  left: 180px;
+  z-index: 999;
+  height: 100vh;
+  background: #525659;
+  padding: 132px;
+  float: left;
+  padding: 10px 20px;
+}
+
+.container {
+  width: 60%;
+}
+
+#date_label{
+  margin-top: -20px;
+}
+
+.blue.darken-3 {
+  background-color: #1107aa !important;
+}
+
+.side_bar li{
+  padding: 10px;
+}
+
+.side_bar li a{
+  color: #fff;
+}
+
+.side_bar li a i{
+  padding: 10px;
+}

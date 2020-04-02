@@ -27,24 +27,36 @@ class Patient extends Component {
   }
 
   render() {
-    const { id, first_name } = this.state.item;
+    const { id, first_name, kp_code, gender, second_name, third_name, address, phone_number, date_of_birth } = this.state.item;
     const { redirect, item } = this.state;
     if (redirect) {
       return <Redirect push to={"/patients"} />;
     }
     if (!item) {
-      return <div>Loading...</div>;
+      return(
+      <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+    );
     }
     return (
-      <li className="collection-item">
-        <Link to={`/patients/${id}`}>{first_name}</Link>
-        <Link className="btn right" to={`/patients/edit/${id}`}>
-          Edit
-        </Link>
-        <button onClick={this.onDelete} className="btn red right">
-          Delete
-        </button>
-      </li>
+      <tr>
+        <td>{kp_code}</td>
+        <td><Link to={`/patients/${id}`}>{first_name} {second_name} {third_name}</Link></td>
+        <td>{gender}</td>
+        <td>{date_of_birth}</td>
+        <td>{address}</td>
+        <td>{phone_number}</td>
+        <td><Link to={`/patient/treatment/add/${id}`}>Add Treatment</Link></td>
+      </tr>
     );
   }
 }

@@ -14,7 +14,7 @@ class Navbar extends Component {
         <nav className="blue darken-3">
           <div className="nav-wrapper">
             <Link to="/patientss" className="brand-logo center">
-              IBU
+              IBU Clinic
             </Link>
             <ul className="right hide-on-small-only use">
               <li>
