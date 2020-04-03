@@ -55,10 +55,10 @@ class AddPatientTreatment extends Component {
         console.log(this.state);
         console.log(response.data);
         this.props.history.push(`/patients/${patientId}`);
-        toast.success(response.data.status);
+        toast.success('Added successfully');
       })
       .catch(err => {
-        toast.error(err.response.data.status);
+        toast.error('Failed to add');
       });
   };
 

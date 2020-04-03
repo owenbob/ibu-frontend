@@ -39,10 +39,10 @@ class AddPatient extends Component {
       })
       .then(response => {
         this.props.history.push("/patients");
-        toast.success(response.data.status);
+        toast.success('Added successfully');
       })
       .catch(err => {
-        toast.error(err.response.data.status);
+        toast.error('Failed to add');
       });
   };
 
@@ -146,12 +146,6 @@ class AddPatient extends Component {
                 value={phone_number}
               />
               <label htmlFor="phone_number">Phone Number</label>
-              <p>
-  <label>
-    <input type="checkbox" disabled="disabled" />
-    <span>Brown</span>
-  </label>
-</p>
             </div>
             <input type="submit" value="Save" className="btn" />
           </form>

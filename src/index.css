@@ -77,3 +77,7 @@ nav ul.right {
 .side_bar li a i{
   padding: 10px;
 }
+
+.red {
+    background-color: #1107aa !important;
+}
